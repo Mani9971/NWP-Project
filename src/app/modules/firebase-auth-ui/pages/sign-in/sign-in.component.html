@@ -1,10 +1,6 @@
 <div class="container">
   <p-card [header]="header" class="register-form">
-    <form
-      [formGroup]="loginGroup"
-      class="form-column"
-      (submit)="signInWithEmail()"
-    >
+    <form [formGroup]="loginGroup" class="form-column">
       <div class="form-item">
         <label class="form-label">E-mail</label>
         <input type="text" pInputText formControlName="email" />
@@ -29,6 +25,7 @@
           label="Sign in"
           [loading]="loading[0]"
           [disabled]="loginGroup.invalid"
+          (click)="signInWithEmail()"
         ></button>
       </div>
       <div class="form-button">
@@ -37,6 +34,7 @@
           pButton
           label="Sign in with Google"
           [loading]="loading[1]"
+          (click)="signInWithGoogle()"
         ></button>
       </div>
     </form>
