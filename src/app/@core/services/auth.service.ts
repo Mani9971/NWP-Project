@@ -42,7 +42,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        console.error(error.message);
       });
   }
   // Sign up with email/password
@@ -56,7 +56,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        console.error(error.message);
       });
   }
   // Send email verfificaiton when new user sign up

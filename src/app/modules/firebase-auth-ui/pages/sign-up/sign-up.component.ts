@@ -1,34 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent implements OnInit {
   header = 'Sign up';
   registrationGroup!: FormGroup;
-  subscription!: Subscription;
-  loading = false;
+  loading = [false, false];
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.registrationGroup = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -42,19 +30,29 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   signUpWithEmail() {
-    this.authService.SignUp(
-      this.registrationGroup.value.email,
-      this.registrationGroup.value
-    );
+    this.loading[0] = true;
+    this.authService
+      .SignUp(
+        this.registrationGroup.value.email,
+        this.registrationGroup.value.password
+      )
+      .then(() => {
+        this.loading[0] = false;
+      })
+      .catch(() => {
+        this.loading[0] = false;
+      });
   }
 
   signUpWithGoogle() {
-    this.authService.GoogleAuth();
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.loading[1] = true;
+    this.authService
+      .GoogleAuth()
+      .then(() => {
+        this.loading[1] = false;
+      })
+      .catch(() => {
+        this.loading[1] = false;
+      });
   }
 }

@@ -6,8 +6,8 @@
       (submit)="signUpWithEmail()"
     >
       <div class="form-item">
-        <label class="form-label">Username</label>
-        <input type="text" pInputText formControlName="username" />
+        <label class="form-label">E-mail</label>
+        <input type="text" pInputText formControlName="email" />
       </div>
       <div class="form-item">
         <label class="form-label">Password</label>
@@ -18,29 +18,21 @@
           [feedback]="false"
         />
       </div>
-      <div class="form-item">
-        <label class="form-label">E-mail</label>
-        <input type="text" pInputText formControlName="email" />
+      <div class="form-button button-margin">
+        <button
+          pButton
+          label="Sign up"
+          [loading]="loading[0]"
+          [disabled]="registrationGroup.invalid"
+        ></button>
       </div>
       <div class="form-button">
         <button
+          icon="pi pi-google"
           pButton
-          label="Register"
-          [disabled]="registrationGroup.invalid"
-          *ngIf="!loading"
+          label="Sign up with Google"
+          [loading]="loading[1]"
         ></button>
-      </div>
-      <div class="progress-spinner">
-        <p-progressSpinner
-          [style]="{ width: '50px', height: '50px' }"
-          styleClass="custom-spinner"
-          *ngIf="loading"
-          strokeWidth="8"
-          animationDuration=".5s"
-        ></p-progressSpinner>
-      </div>
-      <div class="form-button">
-        <button pButton label="Register" *ngIf="!loading"></button>
       </div>
     </form>
   </p-card>

@@ -1,6 +1,6 @@
 
 .container {
-  background-color: mediumseagreen;
+  background-color: rgb(60, 82, 179);
   height: 100vh;
 }
 
@@ -9,7 +9,7 @@
   flex-direction: row;
   justify-content: center;
   padding-top: 10vh;
-  height: 65vh;
+  height: 55vh;
 }
 
 .form-column {
@@ -36,7 +36,10 @@
 .form-button {
   display: flex;
   flex-direction: column;
-  margin: 1em 0 0.5em 0;
+}
+
+.button-margin {
+  margin: 3em 0 0.5em 0;
 }
 
 .progress-spinner {
@@ -48,7 +51,7 @@
     display: flex;
     flex-direction: column;
     height: 250px;
-    width: 27vw;
+    width: 22vw;
   }
 
   .register-form {
@@ -56,6 +59,6 @@
     flex-direction: row;
     justify-content: center;
     padding-top: 10vh;
-    height: 72vh;
+    height: 65vh;
   }
 }
