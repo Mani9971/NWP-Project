@@ -8,7 +8,14 @@ import { AuthService } from 'src/app/@core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerifyEmailComponent implements OnInit {
-  constructor(public authService: AuthService) {}
+  header = 'Registration successful!';
+  userData: any;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
+
+  resendVerificationMail() {
+    this.authService.SendVerificationMail();
+  }
 }
