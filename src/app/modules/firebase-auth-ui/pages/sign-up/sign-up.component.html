@@ -1,0 +1,47 @@
+<div class="container">
+  <p-card [header]="header" class="register-form">
+    <form
+      [formGroup]="registrationGroup"
+      class="form-column"
+      (submit)="signUpWithEmail()"
+    >
+      <div class="form-item">
+        <label class="form-label">Username</label>
+        <input type="text" pInputText formControlName="username" />
+      </div>
+      <div class="form-item">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          pPassword
+          formControlName="password"
+          [feedback]="false"
+        />
+      </div>
+      <div class="form-item">
+        <label class="form-label">E-mail</label>
+        <input type="text" pInputText formControlName="email" />
+      </div>
+      <div class="form-button">
+        <button
+          pButton
+          label="Register"
+          [disabled]="registrationGroup.invalid"
+          *ngIf="!loading"
+        ></button>
+      </div>
+      <div class="progress-spinner">
+        <p-progressSpinner
+          [style]="{ width: '50px', height: '50px' }"
+          styleClass="custom-spinner"
+          *ngIf="loading"
+          strokeWidth="8"
+          animationDuration=".5s"
+        ></p-progressSpinner>
+      </div>
+      <div class="form-button">
+        <button pButton label="Register" *ngIf="!loading"></button>
+      </div>
+    </form>
+  </p-card>
+</div>

@@ -1,0 +1,30 @@
+.form-column {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  height: 250px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 1em 0 0.5em 0;
+}
+
+.form-button {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0 0.5em 0;
+}
+
+.progress-spinner {
+  text-align: center;
+}

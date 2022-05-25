@@ -52,3 +52,39 @@
     </div>
   </div>
 </div>
+<!--
+<p-card [header]="header">
+  <form [formGroup]="loginGroup" class="form-column" (submit)="formSubmitted()">
+    <div class="form-item">
+      <label class="form-label">Username</label>
+      <input type="text" pInputText formControlName="username" />
+    </div>
+    <div class="form-item">
+      <label class="form-label">Password</label>
+      <input
+        type="password"
+        pPassword
+        formControlName="password"
+        [feedback]="false"
+      />
+    </div>
+    <div class="form-button">
+      <button
+        *ngIf="!loading"
+        pButton
+        label="Log in"
+        [disabled]="loginGroup.invalid"
+      ></button>
+    </div>
+    <div class="progress-spinner">
+      <p-progressSpinner
+        [style]="{ width: '50px', height: '50px' }"
+        styleClass="custom-spinner"
+        *ngIf="loading"
+        strokeWidth="8"
+        animationDuration=".5s"
+      ></p-progressSpinner>
+    </div>
+  </form>
+  <ng-template pTemplate="footer"> Powered by burek</ng-template>
+</p-card> -->
