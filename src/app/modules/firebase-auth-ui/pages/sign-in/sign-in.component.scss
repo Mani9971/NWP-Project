@@ -1,8 +1,22 @@
+
+.container {
+  background-color: rgb(60, 82, 179);
+  height: 100vh;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 10vh;
+  height: 55vh;
+}
+
 .form-column {
   display: flex;
   flex-direction: column;
-  width: 70vw;
   height: 250px;
+  width: 22vw;
 }
 
 .form-item {
@@ -19,12 +33,45 @@
   margin: 1em 0 0.5em 0;
 }
 
+.sign-up-message {
+  margin-top: 0.5em;
+}
+
+a {
+  color: #009df8;
+  text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+a:visited {
+  color: #009df8;
+}
+
 .form-button {
   display: flex;
   flex-direction: column;
-  margin: 1em 0 0.5em 0;
 }
 
-.progress-spinner {
-  text-align: center;
+.button-margin {
+  margin: 2.5em 0 0.5em 0;
+}
+
+@media only screen and (max-width: 1366px) {
+  .form-column {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 22vw;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 10vh;
+    height: 65vh;
+  }
 }

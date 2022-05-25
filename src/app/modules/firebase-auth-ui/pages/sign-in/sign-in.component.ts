@@ -1,12 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
@@ -15,30 +8,48 @@ import { AuthService } from 'src/app/@core/services/auth.service';
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInComponent implements OnInit, OnDestroy {
-  header = 'LOGIN.LOGIN';
+export class SignInComponent implements OnInit {
+  header = 'Sign in';
   loginGroup!: FormGroup;
-  subscription!: Subscription;
-  loading = false;
+  loading = [false, false];
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loginGroup = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.email,
+      ]),
     });
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  signInWithEmail() {
+    this.loading[0] = true;
+    this.authService
+      .SignIn(this.loginGroup.value.email, this.loginGroup.value.password)
+      .then(() => {
+        this.loading[0] = false;
+      })
+      .catch(() => {
+        this.loading[0] = false;
+      });
+  }
+
+  signInWithGoogle() {
+    this.loading[1] = true;
+    this.authService
+      .GoogleAuth()
+      .then(() => {
+        this.loading[1] = false;
+      })
+      .catch(() => {
+        this.loading[1] = false;
+      });
   }
 }

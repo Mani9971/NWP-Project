@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class SignUpComponent implements OnInit {
   registrationGroup!: FormGroup;
   loading = [false, false];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.registrationGroup = new FormGroup({
