@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
@@ -8,7 +9,21 @@ import { AuthService } from 'src/app/@core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordComponent implements OnInit {
-  constructor(public authService: AuthService) {}
+  header = 'Reset password';
+  emailControl!: FormControl;
+  loading = [false, false];
 
-  ngOnInit(): void {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.emailControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.email,
+    ]);
+  }
+
+  sendPasswordResetEmail() {
+    this.authService.ForgotPassword(this.emailControl.value);
+  }
 }
