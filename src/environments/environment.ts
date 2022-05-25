@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  config: {
+    apiKey: 'AIzaSyAc9FH2VtZ7qP9798O_N4bFXWB72S_BwPg',
+    authDomain: 'nwp-project-a7f1c.firebaseapp.com',
+    projectId: 'nwp-project-a7f1c',
+    storageBucket: 'nwp-project-a7f1c.appspot.com',
+    messagingSenderId: '139994350384',
+    appId: '1:139994350384:web:ab46f00d178935742ebef5',
+  },
 };
 
 /*

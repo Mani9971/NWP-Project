@@ -7,7 +7,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
   },
-  { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/firebase-auth-ui/firebase-auth-ui.module').then(
+        (m) => m.FirebaseAuthUiModule
+      ),
+  },
 
   { path: '**', redirectTo: 'home' },
 ];
