@@ -1,5 +1,5 @@
 <div class="container">
-  <p-card [header]="header" class="register-form">
+  <p-card [header]="header" class="login-form">
     <form [formGroup]="loginGroup" class="form-column">
       <div class="form-item">
         <label class="form-label">E-mail</label>
@@ -37,6 +37,9 @@
           (click)="signInWithGoogle()"
         ></button>
       </div>
+      <a class="forgot-password-link" routerLink="/auth/password-reset"
+        >Forgot Password?</a
+      >
     </form>
   </p-card>
 </div>
