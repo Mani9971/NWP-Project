@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { Restaurant } from '../models/restaurant';
 
 @Injectable({
@@ -17,7 +17,21 @@ export class ApiService {
     return this.afs.doc('restaurants/' + resturantId).delete();
   }
 
-  getAll(): Observable<Restaurant[]> {
-    return this.afs.collection<Restaurant>('restaurants').valueChanges();
+  getAll() {
+    return this.afs
+      .collection<Restaurant>('restaurants')
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((action) => {
+            const data = action.payload.doc.data() as Restaurant;
+            const id = action.payload.doc.id;
+            return {
+              id,
+              ...data,
+            };
+          });
+        })
+      );
   }
 }

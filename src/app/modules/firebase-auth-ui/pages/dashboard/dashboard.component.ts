@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Restaurant } from 'src/app/@core/models/restaurant';
 import { ApiService } from 'src/app/@core/services/api.service';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
@@ -11,10 +9,10 @@ import { AuthService } from 'src/app/@core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  restaurants: Observable<Restaurant[]>;
+  // restaurants: Observable<Restaurant[]>;
 
   constructor(public authService: AuthService, private apiService: ApiService) {
-    this.restaurants = apiService.getAll();
+    // this.restaurants = apiService.getAll();
   }
   ngOnInit(): void {}
 

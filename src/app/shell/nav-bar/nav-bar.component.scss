@@ -3,12 +3,11 @@
   grid-auto-flow: column;
   grid-template-columns: 0.5fr 3fr 1fr;
   width: 100%;
-  height: 5em;
+  height: 4em;
   padding-left: 2em;
   padding-right: 2em;
   color: white;
   font-size: 16px;
-  border-bottom: 1px solid #47474740;
   background-color: rgb(60, 82, 179);
 }
 
@@ -37,9 +36,14 @@
 
 a {
   text-decoration: none;
+  color: rgba(255, 255, 255, 0.795);
+}
+
+a:hover {
   color: white;
+  transition: 350ms;
 }
 
 .active {
-  font-weight: bold;
+ color: white;
 }

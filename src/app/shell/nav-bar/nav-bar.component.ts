@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   items = [
-    { title: 'Item1', route: '/home' },
-    { title: 'Item2', route: '/route1' },
+    { title: 'Home', route: '/home' },
+    { title: 'Restaurants', route: '/restaurants' },
     { title: 'Item3', route: '/route2' },
     { title: 'Item4', route: '/route3' },
     { title: 'Item5', route: '/route4' },

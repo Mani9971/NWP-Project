@@ -14,6 +14,13 @@ const routes: Routes = [
         (m) => m.FirebaseAuthUiModule
       ),
   },
+  {
+    path: 'restaurants',
+    loadChildren: () =>
+      import('./modules/restaurants/restaurants.module').then(
+        (m) => m.RestaurantsModule
+      ),
+  },
 
   { path: '**', redirectTo: 'auth' },
 ];

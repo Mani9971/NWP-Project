@@ -2,11 +2,12 @@
   <div class="logo-title">
     <span><i class="pi pi-book"></i></span>
     <span
-      ><b>{{ "RestMenu" }}</b></span
+      ><b>{{ "AppName" }}</b></span
     >
   </div>
   <div class="nav-items">
     <a
+      class="item"
       *ngFor="let item of items"
       [routerLink]="item.route"
       routerLinkActive="active"

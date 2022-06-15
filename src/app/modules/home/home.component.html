@@ -1,9 +1,18 @@
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
-
-<p-button
-  type="text"
-  (click)="displaySidebar = true"
-  icon="pi pi-plus"
-  label="Show"
-></p-button>
+<div class="container">
+  <div class="shade">
+    <p class="info-text">Find your restaurant</p>
+    <p-autoComplete
+      [(ngModel)]="userInput"
+      (onSelect)="onSelect()"
+      [suggestions]="results"
+      (completeMethod)="search($event)"
+      type="text"
+      class="p-inputtext-lg"
+      field="name"
+      placeholder="Restaurant name"
+    >
+    </p-autoComplete>
+    <buttton pButton label="Search" (click)="searchPressed()"></buttton>
+  </div>
+  <img class="image" src="./assets/restaurant.jpg" />
+</div>
