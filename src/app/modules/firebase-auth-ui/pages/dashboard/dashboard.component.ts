@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Restaurant } from 'src/app/@core/models/restaurant';
+import { ApiService } from 'src/app/@core/services/api.service';
 import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
@@ -8,7 +11,19 @@ import { AuthService } from 'src/app/@core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  constructor(public authService: AuthService) {}
+  restaurants: Observable<Restaurant[]>;
 
+  constructor(public authService: AuthService, private apiService: ApiService) {
+    this.restaurants = apiService.getAll();
+  }
   ngOnInit(): void {}
+
+  add() {
+    this.apiService
+      .add({ data: 'testObjectData' })
+      .then((res: any) => {
+        console.log('Done!', res);
+      })
+      .catch(() => console.log('errorOccured!'));
+  }
 }

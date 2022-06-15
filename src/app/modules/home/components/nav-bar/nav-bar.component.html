@@ -1,0 +1,17 @@
+<div class="nav-bar">
+  <div class="logo-title">
+    <span><i class="pi pi-book"></i></span>
+    <span
+      ><b>{{ "RestMenu" }}</b></span
+    >
+  </div>
+  <div class="nav-items">
+    <a
+      *ngFor="let item of items"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      >{{ item.title }}</a
+    >
+  </div>
+  <div class="user-menu"><b>manuel.ples</b></div>
+</div>
