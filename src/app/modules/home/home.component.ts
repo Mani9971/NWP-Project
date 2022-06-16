@@ -32,7 +32,10 @@ export class HomeComponent implements OnInit {
   }
 
   onSelect() {
-    this.router.navigate(['restaurants/' + this.userInput.id]);
+    this.router.navigate([
+      'restaurants/' + this.userInput.id,
+      { name: this.userInput.name },
+    ]);
   }
 
   ngOnInit(): void {}
