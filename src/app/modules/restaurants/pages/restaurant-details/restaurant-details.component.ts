@@ -21,6 +21,7 @@ export class RestaurantDetailsComponent implements OnInit {
   ];
 
   data$: any = {};
+  restaurantName = '';
   categories = [
     { label: 'Fast food', value: 'fast food' },
     { label: 'a food', value: 'a food' },
@@ -40,6 +41,9 @@ export class RestaurantDetailsComponent implements OnInit {
     this.data$ = this.route.params.pipe(
       switchMap((params) =>
         this.apiService.getRestaurant(params['id']).pipe(
+          tap(() => {
+            this.restaurantName = params['name'];
+          }),
           map((restaurant: any) => {
             return restaurant.menuItems.map((x: any) => x);
           })
@@ -55,8 +59,7 @@ export class RestaurantDetailsComponent implements OnInit {
               .getDownloadURL(),
           };
         });
-      }),
-      tap(console.log)
+      })
     );
   }
 }

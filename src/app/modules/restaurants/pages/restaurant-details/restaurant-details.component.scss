@@ -3,9 +3,16 @@
   height: calc(100% - 4em);
   text-align: center;
   position: fixed;
+  padding: 0 13em 0 13em;
 }
-
 
 .item-cell {
   max-width: 100px;
+}
+
+.header {
+  font-size: x-large;
+  text-align: left;
+  font-weight: bold;
+  margin: 1em 0 1em 0;
 }
