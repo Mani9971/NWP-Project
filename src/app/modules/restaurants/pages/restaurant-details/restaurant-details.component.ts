@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
+import { MenuItem } from 'primeng/api';
 import { map, switchMap, tap } from 'rxjs';
 import { ApiService } from 'src/app/@core/services/api.service';
 
@@ -9,6 +10,16 @@ import { ApiService } from 'src/app/@core/services/api.service';
   styleUrls: ['./restaurant-details.component.scss'],
 })
 export class RestaurantDetailsComponent implements OnInit {
+  public items: MenuItem[] = [
+    {
+      label: 'All restaurants',
+      url: 'restaurants',
+    },
+    {
+      label: 'Price list',
+    },
+  ];
+
   data$: any = {};
   categories = [
     { label: 'Fast food', value: 'fast food' },

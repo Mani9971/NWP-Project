@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -32,6 +33,7 @@ import { RestaurantsComponent } from './restaurants.component';
     DynamicDialogModule,
     GMapModule,
     TooltipModule,
+    BreadcrumbModule,
   ],
   entryComponents: [MapLocationComponent],
 })
