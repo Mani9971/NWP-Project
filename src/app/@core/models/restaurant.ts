@@ -9,5 +9,7 @@ export interface Restaurant {
 interface MenuItem {
   name: string;
   price: string;
+  image: string;
+  category: string;
   info: string;
 }

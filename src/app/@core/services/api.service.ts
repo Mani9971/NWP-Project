@@ -13,8 +13,8 @@ export class ApiService {
     return this.afs.collection<Restaurant[]>('restaurants').add(data);
   }
 
-  delete(resturantId: string) {
-    return this.afs.doc('restaurants/' + resturantId).delete();
+  delete(restaurantId: string) {
+    return this.afs.doc('restaurants/' + restaurantId).delete();
   }
 
   getAll() {
@@ -33,5 +33,9 @@ export class ApiService {
           });
         })
       );
+  }
+
+  getRestaurant(restaurantId: string) {
+    return this.afs.doc('restaurants/' + restaurantId).valueChanges();
   }
 }
