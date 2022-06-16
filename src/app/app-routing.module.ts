@@ -21,6 +21,7 @@ const routes: Routes = [
         (m) => m.RestaurantsModule
       ),
   },
+  { path: 'user-entries', loadChildren: () => import('./modules/user-entries/user-entries.module').then(m => m.UserEntriesModule) },
 
   { path: '**', redirectTo: 'auth' },
 ];

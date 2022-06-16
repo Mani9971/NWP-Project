@@ -10,7 +10,7 @@ export class NavBarComponent implements OnInit {
   items = [
     { title: 'Home', route: '/home' },
     { title: 'Restaurants', route: '/restaurants' },
-    { title: 'Item3', route: '/route2' },
+    { title: 'My entries', route: '/user-entries' },
     { title: 'Item4', route: '/route3' },
     { title: 'Item5', route: '/route4' },
   ];
