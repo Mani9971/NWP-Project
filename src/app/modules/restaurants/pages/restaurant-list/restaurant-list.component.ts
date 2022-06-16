@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Observable } from 'rxjs';
 import { Restaurant } from 'src/app/@core/models/restaurant';
 import { ApiService } from 'src/app/@core/services/api.service';
+import { ContactComponent } from '../../components/contact/contact.component';
 import { MapLocationComponent } from '../../components/map-location/map-location.component';
 
 @Component({
@@ -15,7 +17,8 @@ export class RestaurantListComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    public dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,32 +28,25 @@ export class RestaurantListComponent implements OnInit {
   showMap(restaurant: Restaurant) {
     const ref = this.dialogService.open(MapLocationComponent, {
       data: {
-        lat: restaurant.coordinates?.latitude ?? '45.2987136',
-        lon: restaurant.coordinates?.longitude ?? '18.8022098',
+        lat: restaurant.coordinates?.latitude,
+        lon: restaurant.coordinates?.longitude,
       },
       header: 'Restaurant Location - ' + restaurant.name,
-      width: '70%',
+      width: '40%',
     });
   }
 
   showContactInfo(restaurant: Restaurant) {
-    const ref = this.dialogService.open(MapLocationComponent, {
+    const ref = this.dialogService.open(ContactComponent, {
       data: {
         contact: restaurant.contactInfo,
       },
       header: 'Contact information - ' + restaurant.name,
-      width: '70%',
+      width: '30%',
     });
   }
 
-  showPriceList(restaurant: Restaurant) {
-    const ref = this.dialogService.open(MapLocationComponent, {
-      data: {
-        lat: '',
-        lon: '',
-      },
-      header: 'Contact information - ' + restaurant.name,
-      width: '70%',
-    });
+  showPriceList(restaurant: any) {
+    this.router.navigate(['restaurants/' + restaurant.id]);
   }
 }
