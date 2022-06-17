@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { Restaurant } from 'src/app/@core/models/restaurant';
 import { ApiService } from 'src/app/@core/services/api.service';
 
 @Component({
@@ -37,16 +38,11 @@ export class UserEntryListComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  deleteEntry(event: any) {
+  deleteEntry(restaurant: Restaurant) {
     this.confirmationService.confirm({
-      target: event.target,
-      message: 'Are you sure that you want to proceed?',
-      icon: 'pi pi-exclamation-triangle',
+      message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        //confirm action
-      },
-      reject: () => {
-        //reject action
+        //Actual logic to perform a confirmation
       },
     });
   }
