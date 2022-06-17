@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs';
+import { map, ReplaySubject } from 'rxjs';
 import { Restaurant } from '../models/restaurant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(public afs: AngularFirestore) {}
+  public currentUserIdSubject = new ReplaySubject(1);
+  public currentUserId$ = this.currentUserIdSubject.asObservable();
+
+  constructor(public afs: AngularFirestore, private afAuth: AngularFireAuth) {
+    this.afAuth.user.subscribe((user) =>
+      this.currentUserIdSubject.next(user?.uid)
+    );
+  }
 
   add(data: any) {
     return this.afs.collection<Restaurant[]>('restaurants').add(data);
@@ -33,6 +41,14 @@ export class ApiService {
           });
         })
       );
+  }
+
+  getUserRestaurants(currentUserId: any) {
+    return this.afs
+      .collection<Restaurant>('restaurants', (ref) =>
+        ref.where('ownerId', '==', currentUserId)
+      )
+      .valueChanges();
   }
 
   getRestaurant(restaurantId: string) {

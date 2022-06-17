@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/@core/services/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,7 +16,10 @@ export class NavBarComponent implements OnInit {
     { title: 'Item5', route: '/route4' },
   ];
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
+  isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
 
   ngOnInit(): void {}
 }

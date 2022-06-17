@@ -6,12 +6,18 @@
     >
   </div>
   <div class="nav-items">
+    <a class="item" routerLink="/home" routerLinkActive="active">{{
+      "Home"
+    }}</a>
+    <a class="item" routerLink="/restaurants" routerLinkActive="active">{{
+      "Restaurants"
+    }}</a>
     <a
+      *ngIf="isLoggedIn()"
       class="item"
-      *ngFor="let item of items"
-      [routerLink]="item.route"
+      routerLink="/user-entries"
       routerLinkActive="active"
-      >{{ item.title }}</a
+      >{{ "My entries" }}</a
     >
   </div>
   <div class="user-menu"><b>manuel.ples</b></div>
