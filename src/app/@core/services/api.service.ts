@@ -48,7 +48,19 @@ export class ApiService {
       .collection<Restaurant>('restaurants', (ref) =>
         ref.where('ownerId', '==', currentUserId)
       )
-      .valueChanges();
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((action) => {
+            const data = action.payload.doc.data() as Restaurant;
+            const id = action.payload.doc.id;
+            return {
+              id,
+              ...data,
+            };
+          });
+        })
+      );
   }
 
   getRestaurant(restaurantId: string) {
