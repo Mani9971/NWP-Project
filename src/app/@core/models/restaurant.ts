@@ -2,8 +2,9 @@ export interface Restaurant {
   name: string;
   email: string;
   contactInfo: string;
-  coordinates: GeolocationCoordinates;
+  coordinates: { longitude: string; latitude: string };
   menuItems: MenuItem[];
+  ownerId: string;
 }
 
 interface MenuItem {

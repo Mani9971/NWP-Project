@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-
-import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
 import { RestaurantAddAndEditComponent } from './pages/restaurant-add-and-edit/restaurant-add-and-edit.component';
@@ -22,11 +22,12 @@ import { UserEntriesComponent } from './user-entries.component';
   imports: [
     CommonModule,
     UserEntriesRoutingModule,
-    CardModule,
     ButtonModule,
     InputTextModule,
+    InputNumberModule,
     DropdownModule,
     ConfirmDialogModule,
+    ReactiveFormsModule,
   ],
 })
 export class UserEntriesModule {}

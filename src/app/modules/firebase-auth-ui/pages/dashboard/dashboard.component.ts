@@ -16,12 +16,12 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  add() {
-    this.apiService
-      .add({ data: 'testObjectData' })
-      .then((res: any) => {
-        console.log('Done!', res);
-      })
-      .catch(() => console.log('errorOccured!'));
-  }
+  // add() {
+  //   this.apiService
+  //     .add({ data: 'testObjectData' })
+  //     .then((res: any) => {
+  //       console.log('Done!', res);
+  //     })
+  //     .catch(() => console.log('errorOccured!'));
+  // }
 }

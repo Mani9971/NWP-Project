@@ -17,8 +17,8 @@ export class ApiService {
     );
   }
 
-  add(data: any) {
-    return this.afs.collection<Restaurant[]>('restaurants').add(data);
+  add(data: Restaurant) {
+    return this.afs.collection<Restaurant>('restaurants').add(data);
   }
 
   delete(restaurantId: string) {

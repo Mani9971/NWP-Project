@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  margin-left: 8em;
+  margin: 0 8em 1em 8em;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.form-label {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1em;
+  width: 14em;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22em;
+}
+
+.form-button {
+  margin-left: 15em;
+  width: 75px;
+}
+

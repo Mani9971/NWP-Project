@@ -14,3 +14,20 @@ h1 {
   margin: 1rem 0;
   padding: 0 1rem;
 }
+
+input,
+.p-inputtext,
+.p-inputnumber,
+.p-inputnumber span,
+.p-dropdown,
+.p-autocomplete,
+.p-calendar {
+  width: 100%;
+  display: flex;
+}
+
+.required:after {
+  content: '*';
+  color: red;
+}
+

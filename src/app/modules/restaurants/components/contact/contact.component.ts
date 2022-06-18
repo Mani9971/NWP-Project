@@ -9,10 +9,12 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 })
 export class ContactComponent implements OnInit {
   phone: string = '';
+  email: string = '';
 
   constructor(public config: DynamicDialogConfig) {}
 
   ngOnInit(): void {
     this.phone = this.config.data?.contact ?? 'No contact info';
+    this.email = this.config.data?.email ?? '';
   }
 }

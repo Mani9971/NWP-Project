@@ -40,6 +40,7 @@ export class RestaurantListComponent implements OnInit {
     const ref = this.dialogService.open(ContactComponent, {
       data: {
         contact: restaurant.contactInfo,
+        email: restaurant.email,
       },
       header: 'Contact information - ' + restaurant.name,
       width: '30%',
