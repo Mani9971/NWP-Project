@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-menu-item-dialog',
@@ -19,16 +20,19 @@ export class MenuItemDialogComponent implements OnInit {
   ];
   data$: any = {};
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public ref: DynamicDialogRef) {
     this.formGroup = fb.group({
       name: ['', Validators.required],
       price: ['', Validators.required],
-      category: ['', Validators.required],
+      category: ['fast food', Validators.required],
       info: [''],
     });
   }
 
   ngOnInit(): void {}
 
-  submitForm() {}
+  submitForm() {
+    console.log('formGroup...', this.formGroup.value);
+    this.ref.close(this.formGroup.value);
+  }
 }

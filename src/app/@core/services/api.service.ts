@@ -70,4 +70,47 @@ export class ApiService {
   getRestaurant(restaurantId: string) {
     return this.afs.doc('restaurants/' + restaurantId).valueChanges();
   }
+
+  getMenuItems(restaurantId: string) {
+    return this.afs
+      .doc('restaurants/' + restaurantId)
+      .collection('menuItems')
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((action) => {
+            const data = action.payload.doc.data();
+            const id = action.payload.doc.id;
+            return {
+              id,
+              ...data,
+            };
+          });
+        })
+      );
+  }
+
+  addItem(restaurantId: string, data: any) {
+    console.log('data...', data);
+    return this.afs
+      .doc('restaurants/' + restaurantId)
+      .collection('menuItems')
+      .add(data);
+  }
+
+  deleteItem(restaurantId: string, itemId: string) {
+    return this.afs
+      .doc('restaurants/' + restaurantId)
+      .collection('menuItems')
+      .doc(itemId)
+      .delete();
+  }
+
+  updateItem(restaurantId: string, itemId: string, data: any) {
+    return this.afs
+      .doc('restaurants/' + restaurantId)
+      .collection('menuItems')
+      .doc(itemId)
+      .update(data);
+  }
 }

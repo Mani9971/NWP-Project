@@ -35,12 +35,12 @@ export class RestaurantDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.data$ = this.route.params.pipe(
       switchMap((params) =>
-        this.apiService.getRestaurant(params['id']).pipe(
+        this.apiService.getMenuItems(params['id']).pipe(
           tap(() => {
             this.restaurantName = params['name'];
           }),
-          map((restaurant: any) => {
-            return restaurant.menuItems.map((x: any) => x);
+          map((menuItems: any) => {
+            return menuItems.map((x: any) => x);
           })
         )
       )

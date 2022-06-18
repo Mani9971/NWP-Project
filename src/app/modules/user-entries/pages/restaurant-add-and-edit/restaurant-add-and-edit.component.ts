@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { ApiService } from 'src/app/@core/services/api.service';
+import { NotificationService } from 'src/app/@core/services/notification.service';
 import { MenuItemDialogComponent } from '../../components/menu-item-dialog/menu-item-dialog.component';
 
 @Component({
@@ -23,10 +24,13 @@ export class RestaurantAddAndEditComponent implements OnInit {
   ];
 
   data$ = new Observable<any>();
+  restaurantId = '';
+
   constructor(
     private dialogService: DialogService,
     private route: ActivatedRoute,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private notificationService: NotificationService
   ) {}
 
   showMenuItemDialog() {
@@ -34,14 +38,31 @@ export class RestaurantAddAndEditComponent implements OnInit {
       header: 'Add menu item',
       width: '40%',
     });
+
+    ref.onClose.subscribe((data) => {
+      if (data) {
+        this.apiService
+          .addItem(this.restaurantId, data)
+          .then(() =>
+            this.notificationService.showSuccessNotification('Entry updated')
+          )
+          .catch((err) => {
+            this.notificationService.showErrorNotification('Error occurred');
+            console.log('err...', err);
+          });
+      }
+    });
   }
 
   ngOnInit(): void {
     this.data$ = this.route.params.pipe(
       switchMap((params) =>
-        this.apiService.getRestaurant(params['id']).pipe(
-          map((restaurant: any) => {
-            return restaurant?.menuItems.map((x: any) => x);
+        this.apiService.getMenuItems(params['id']).pipe(
+          tap(console.log),
+          map((menuItems: any) => {
+            this.restaurantId = params['id'];
+            console.log('restaurant...', menuItems);
+            return menuItems.map((x: any) => x);
           })
         )
       )
