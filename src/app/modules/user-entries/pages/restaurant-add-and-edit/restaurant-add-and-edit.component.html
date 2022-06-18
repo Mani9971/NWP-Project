@@ -1,2 +1,6 @@
 <p-breadcrumb [model]="items"></p-breadcrumb>
 <app-add-restaurant></app-add-restaurant>
+<div class="price-list-button">
+  <button pButton label="Add menu item" (click)="showMenuItemDialog()"></button>
+</div>
+<app-price-list-table [data]="data$ | async"></app-price-list-table>

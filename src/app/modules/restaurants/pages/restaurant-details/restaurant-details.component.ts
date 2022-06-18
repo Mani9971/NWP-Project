@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { map, switchMap, tap } from 'rxjs';
@@ -24,18 +23,14 @@ export class RestaurantDetailsComponent implements OnInit {
   restaurantName = '';
   categories = [
     { label: 'Fast food', value: 'fast food' },
-    { label: 'a food', value: 'a food' },
-    { label: 'New', value: 'new' },
-    { label: 'Negotiation', value: 'negotiation' },
-    { label: 'Renewal', value: 'renewal' },
-    { label: 'Proposal', value: 'proposal' },
+    { label: 'Hamburgers', value: 'hamburgers' },
+    { label: 'Grill', value: 'grill' },
+    { label: 'Pizza', value: 'pizza' },
+    { label: 'Dessert', value: 'dessert' },
+    { label: 'Soup', value: 'soup' },
   ];
 
-  constructor(
-    private route: ActivatedRoute,
-    private apiService: ApiService,
-    private afStorage: AngularFireStorage
-  ) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.data$ = this.route.params.pipe(
@@ -48,18 +43,7 @@ export class RestaurantDetailsComponent implements OnInit {
             return restaurant.menuItems.map((x: any) => x);
           })
         )
-      ),
-
-      map((data) => {
-        return data.map((x: any) => {
-          return {
-            ...x,
-            image: this.afStorage
-              .ref('Poslužitelj-Klijent-SocketIO.png')
-              .getDownloadURL(),
-          };
-        });
-      })
+      )
     );
   }
 }

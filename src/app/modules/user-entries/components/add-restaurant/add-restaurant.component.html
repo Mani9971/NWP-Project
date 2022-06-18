@@ -2,16 +2,26 @@
 <form [formGroup]="formGroup" class="form" (submit)="submitForm()">
   <div class="form-row">
     <label class="form-label required">Restaurant name</label>
-    <input formControlName="name" class="form-item" pInputText />
+    <input
+      placeholder="Pizza"
+      formControlName="name"
+      class="form-item"
+      pInputText
+    />
   </div>
   <div class="form-row">
     <label class="form-label required">E-mail</label>
-    <input formControlName="email" class="form-item" pInputText />
+    <input
+      placeholder="example@gmail.com"
+      formControlName="email"
+      class="form-item"
+      pInputText
+    />
   </div>
   <div class="form-row">
     <label class="form-label required">Phone number</label>
     <input
-      placeholder="Phone"
+      placeholder="031658912"
       formControlName="contactInfo"
       class="form-item"
       pInputText
@@ -19,11 +29,21 @@
   </div>
   <div class="form-row">
     <label class="form-label">Longitude</label>
-    <input formControlName="longitude" class="form-item" pInputText />
+    <input
+      placeholder="46.2"
+      formControlName="longitude"
+      class="form-item"
+      pInputText
+    />
   </div>
   <div class="form-row">
     <label class="form-label">Latitude</label>
-    <input formControlName="latitude" class="form-item" pInputText />
+    <input
+      placeholder="35.2"
+      formControlName="latitude"
+      class="form-item"
+      pInputText
+    />
   </div>
   <button pButton label="Save" class="form-button"></button>
 </form>

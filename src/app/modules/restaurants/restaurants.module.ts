@@ -5,7 +5,6 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { GMapModule } from 'primeng/gmap';
-import { ImageModule } from 'primeng/image';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { ContactComponent } from './components/contact/contact.component';
@@ -28,7 +27,6 @@ import { RestaurantsComponent } from './restaurants.component';
     RestaurantsRoutingModule,
     TableModule,
     ButtonModule,
-    ImageModule,
     DropdownModule,
     DynamicDialogModule,
     GMapModule,

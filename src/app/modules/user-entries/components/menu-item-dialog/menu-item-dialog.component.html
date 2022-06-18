@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup" class="form" (submit)="submitForm()">
+  <div class="form-row">
+    <label class="form-label required">Name</label>
+    <input
+      placeholder="Hamburger"
+      formControlName="name"
+      class="form-item"
+      pInputText
+    />
+  </div>
+
+  <div class="form-row">
+    <label class="form-label required">Price</label>
+    <p-inputNumber
+      placeholder="12 kn"
+      formControlName="price"
+      suffix=" kn"
+      [useGrouping]="false"
+      class="form-item"
+    ></p-inputNumber>
+  </div>
+  <div class="form-row">
+    <label class="form-label required">Category</label>
+    <p-dropdown
+      [options]="categories"
+      formControlName="category"
+      class="form-item"
+      appendTo="body"
+    >
+    </p-dropdown>
+  </div>
+  <div class="form-row">
+    <label class="form-label">Description</label>
+    <input formControlName="info" class="form-item" pInputText />
+  </div>
+  <button pButton label="Add" class="form-button"></button>
+</form>
