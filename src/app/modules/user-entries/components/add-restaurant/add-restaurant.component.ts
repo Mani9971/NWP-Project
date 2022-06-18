@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable, of, Subscription, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/@core/services/api.service';
+import { NotificationService } from 'src/app/@core/services/notification.service';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -14,13 +15,16 @@ export class AddRestaurantComponent implements OnInit {
   formGroup: FormGroup;
 
   private currentUserId = '';
+  private entryId = '';
   private isEditMode = false;
   title = '';
 
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     this.formGroup = fb.group({
       name: [[], Validators.required],
@@ -42,16 +46,20 @@ export class AddRestaurantComponent implements OnInit {
           console.log('currentUserId', this.currentUserId);
           let restaurantId = params.get('id');
           if (!restaurantId) {
+            this.title = 'Add restaurant';
+            this.isEditMode = false;
             return new Observable();
           }
 
           return this.apiService.getRestaurant(restaurantId).pipe(
             switchMap((restaurant: any) => {
+              console.log('restaurant...', restaurant);
               if (restaurant.ownerId !== this.currentUserId) {
                 this.title = 'Add restaurant';
                 this.isEditMode = false;
               }
               this.isEditMode = true;
+              this.entryId = restaurantId;
               this.formGroup.patchValue({
                 name: restaurant.name,
                 email: restaurant.email,
@@ -81,28 +89,38 @@ export class AddRestaurantComponent implements OnInit {
     }
 
     let values = this.formGroup.value;
+    let data = {
+      name: values.name,
+      contactInfo: values.contactInfo,
+      coordinates: {
+        latitude: values.latitude,
+        longitude: values.longitude,
+      },
+      email: values.email,
+      menuItems: [{ category: '', image: '', info: '', name: '', price: '' }],
+      ownerId: this.currentUserId,
+    };
     if (!this.isEditMode) {
       this.apiService
-        .add({
-          name: values.name,
-          contactInfo: values.contactInfo,
-          coordinates: {
-            latitude: values.latitude,
-            longitude: values.longitude,
-          },
-          email: values.email,
-          menuItems: [
-            { category: '', image: '', info: '', name: '', price: '' },
-          ],
-          ownerId: this.currentUserId,
+        .add(data)
+        .then(() => {
+          this.router.navigate(['user-entries']);
+          this.notificationService.showSuccessNotification('Entry added');
         })
-        .then((res: any) => {
-          console.log('Done!', res);
-        })
-        .catch(() => console.log('errorOccured!'));
+        .catch(() =>
+          this.notificationService.showErrorNotification('Error occurred')
+        );
       return;
     }
-    //edit request...
+    this.apiService
+      .update(this.entryId, data)
+      .then(() =>
+        this.notificationService.showSuccessNotification('Entry updated')
+      )
+      .catch((err) => {
+        this.notificationService.showErrorNotification('Error occurred');
+        console.log('err...', err);
+      });
     console.log('form submitted with values', this.formGroup.value);
   }
 }

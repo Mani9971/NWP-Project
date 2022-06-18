@@ -21,6 +21,10 @@ export class ApiService {
     return this.afs.collection<Restaurant>('restaurants').add(data);
   }
 
+  update(restaurantId: string, data: any) {
+    return this.afs.doc<Restaurant>('restaurants/' + restaurantId).update(data);
+  }
+
   delete(restaurantId: string) {
     return this.afs.doc('restaurants/' + restaurantId).delete();
   }

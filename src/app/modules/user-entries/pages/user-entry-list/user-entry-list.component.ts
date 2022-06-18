@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { Subscription } from 'rxjs';
-import { Restaurant } from 'src/app/@core/models/restaurant';
+import { Subscription, tap } from 'rxjs';
 import { ApiService } from 'src/app/@core/services/api.service';
+import { NotificationService } from 'src/app/@core/services/notification.service';
 
 @Component({
   templateUrl: './user-entry-list.component.html',
@@ -17,13 +17,19 @@ export class UserEntryListComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private confirmationService: ConfirmationService,
+    private notificationService: NotificationService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.apiService.currentUserId$.subscribe(
-      (id) => (this.userRestaurants = this.apiService.getUserRestaurants(id))
-    );
+    this.subscription = this.apiService.currentUserId$
+      .pipe(
+        tap(
+          (id) =>
+            (this.userRestaurants = this.apiService.getUserRestaurants(id))
+        )
+      )
+      .subscribe();
   }
 
   addEntry() {
@@ -38,11 +44,18 @@ export class UserEntryListComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  deleteEntry(restaurant: Restaurant) {
+  deleteEntry(restaurant: any) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        //Actual logic to perform a confirmation
+        this.apiService
+          .delete(restaurant.id)
+          .then((res: any) => {
+            this.notificationService.showSuccessNotification('Entry deleted');
+          })
+          .catch(() =>
+            this.notificationService.showErrorNotification('Error occurred')
+          );
       },
     });
   }

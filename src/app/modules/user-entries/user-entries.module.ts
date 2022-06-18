@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -28,6 +29,7 @@ import { UserEntriesComponent } from './user-entries.component';
     DropdownModule,
     ConfirmDialogModule,
     ReactiveFormsModule,
+    BreadcrumbModule,
   ],
 })
 export class UserEntriesModule {}

@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './@core/services/auth.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,7 @@ import { ShellModule } from './shell/shell.module';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    ToastModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
