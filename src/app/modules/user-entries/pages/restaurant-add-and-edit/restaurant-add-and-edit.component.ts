@@ -25,6 +25,7 @@ export class RestaurantAddAndEditComponent implements OnInit {
 
   data$ = new Observable<any>();
   restaurantId = '';
+  showTable = false;
 
   constructor(
     private dialogService: DialogService,
@@ -33,24 +34,41 @@ export class RestaurantAddAndEditComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  showMenuItemDialog() {
+  showMenuItemDialog(item?: any) {
     const ref = this.dialogService.open(MenuItemDialogComponent, {
+      data: {
+        restaurantId: this.restaurantId,
+        itemId: item?.id,
+        data: item ?? '',
+      },
       header: 'Add menu item',
       width: '40%',
     });
 
     ref.onClose.subscribe((data) => {
-      if (data) {
+      if (!data) {
+        return;
+      }
+      console.log('data...', data);
+      if (!data.editMode) {
         this.apiService
-          .addItem(this.restaurantId, data)
+          .addItem(this.restaurantId, data.data)
           .then(() =>
-            this.notificationService.showSuccessNotification('Entry updated')
+            this.notificationService.showSuccessNotification('Entry added')
           )
           .catch((err) => {
             this.notificationService.showErrorNotification('Error occurred');
-            console.log('err...', err);
           });
+        return;
       }
+      this.apiService
+        .updateItem(this.restaurantId, data.data.id, data.data)
+        .then(() =>
+          this.notificationService.showSuccessNotification('Entry updated')
+        )
+        .catch((err) => {
+          this.notificationService.showErrorNotification('Error occurred');
+        });
     });
   }
 
@@ -60,6 +78,8 @@ export class RestaurantAddAndEditComponent implements OnInit {
         this.apiService.getMenuItems(params['id']).pipe(
           tap(console.log),
           map((menuItems: any) => {
+            this.showTable = true;
+            console.log('showtable...', this.showTable);
             this.restaurantId = params['id'];
             console.log('restaurant...', menuItems);
             return menuItems.map((x: any) => x);
@@ -67,5 +87,21 @@ export class RestaurantAddAndEditComponent implements OnInit {
         )
       )
     );
+  }
+
+  deleteItem(itemId: string) {
+    this.apiService
+      .deleteItem(this.restaurantId, itemId)
+      .then(() =>
+        this.notificationService.showSuccessNotification('Entry deleted')
+      )
+      .catch((err) => {
+        this.notificationService.showErrorNotification('Error occurred');
+      });
+  }
+
+  editItem(item: any) {
+    console.log('item...', item);
+    this.showMenuItemDialog(item);
   }
 }

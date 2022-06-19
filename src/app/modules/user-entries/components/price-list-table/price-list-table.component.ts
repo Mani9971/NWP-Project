@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
+
 @Component({
   selector: 'app-price-list-table',
   templateUrl: './price-list-table.component.html',
@@ -11,6 +14,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PriceListTableComponent implements OnInit {
+  @Input() data: any = {};
+
+  @Output() onDelete = new EventEmitter();
+  @Output() onEdit = new EventEmitter();
+
   categories = [
     { label: 'Fast food', value: 'fast food' },
     { label: 'Hamburgers', value: 'hamburgers' },
@@ -20,8 +28,15 @@ export class PriceListTableComponent implements OnInit {
     { label: 'Soup', value: 'soup' },
   ];
 
-  @Input() data: any = {};
   constructor() {}
+
+  deletePressed(itemId: string) {
+    this.onDelete.emit(itemId);
+  }
+
+  editPressed(item: any) {
+    this.onEdit.emit(item);
+  }
 
   ngOnInit(): void {}
 }

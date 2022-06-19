@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-menu-item-dialog',
@@ -19,8 +19,14 @@ export class MenuItemDialogComponent implements OnInit {
     { label: 'Soup', value: 'soup' },
   ];
   data$: any = {};
+  isEditMode = false;
+  currentItemId = '';
 
-  constructor(private fb: FormBuilder, public ref: DynamicDialogRef) {
+  constructor(
+    private fb: FormBuilder,
+    private config: DynamicDialogConfig,
+    private ref: DynamicDialogRef
+  ) {
     this.formGroup = fb.group({
       name: ['', Validators.required],
       price: ['', Validators.required],
@@ -29,10 +35,20 @@ export class MenuItemDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let data = this.config.data?.data;
+    if (data) {
+      this.isEditMode = true;
+      this.currentItemId = data.id;
+      this.formGroup.patchValue(data);
+    }
+  }
 
   submitForm() {
     console.log('formGroup...', this.formGroup.value);
-    this.ref.close(this.formGroup.value);
+    this.ref.close({
+      editMode: this.isEditMode,
+      data: { id: this.currentItemId, ...this.formGroup.value },
+    });
   }
 }

@@ -13,6 +13,7 @@
             Category<p-sortIcon field="category"></p-sortIcon>
           </th>
           <th>Info</th>
+          <th></th>
         </tr>
         <tr>
           <th class="item-cell">
@@ -48,6 +49,8 @@
               </ng-template>
             </p-columnFilter>
           </th>
+
+          <th></th>
           <th></th>
         </tr>
       </ng-template>
@@ -57,6 +60,22 @@
           <td>{{ item.price + " kn" }}</td>
           <td>{{ item.category }}</td>
           <td>{{ item.info }}</td>
+          <td class="table-actions p-buttonset">
+            <button
+              pButton
+              icon="pi pi-pencil"
+              label="Edit"
+              class="p-button-sm p-button-outlined"
+              (click)="editPressed(item)"
+            ></button>
+            <button
+              pButton
+              icon="pi pi-trash"
+              class="p-button-outlined p-button-sm"
+              pTooltip="Delete"
+              (click)="deletePressed(item.id)"
+            ></button>
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage" let-columns>

@@ -1,6 +1,16 @@
 <p-breadcrumb [model]="items"></p-breadcrumb>
-<app-add-restaurant></app-add-restaurant>
-<div class="price-list-button">
-  <button pButton label="Add menu item" (click)="showMenuItemDialog()"></button>
+<app-add-restaurant #form></app-add-restaurant>
+<div *ngIf="form.isEditMode">
+  <div class="price-list-button">
+    <button
+      pButton
+      label="Add menu item"
+      (click)="showMenuItemDialog()"
+    ></button>
+  </div>
+  <app-price-list-table
+    (onDelete)="deleteItem($event)"
+    (onEdit)="editItem($event)"
+    [data]="data$ | async"
+  ></app-price-list-table>
 </div>
-<app-price-list-table [data]="data$ | async"></app-price-list-table>

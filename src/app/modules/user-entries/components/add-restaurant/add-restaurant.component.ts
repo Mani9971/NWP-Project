@@ -16,7 +16,7 @@ export class AddRestaurantComponent implements OnInit {
 
   private currentUserId = '';
   private entryId = '';
-  private isEditMode = false;
+  isEditMode = false;
   title = '';
 
   constructor(

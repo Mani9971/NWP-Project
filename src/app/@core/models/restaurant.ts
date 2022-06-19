@@ -5,10 +5,3 @@ export interface Restaurant {
   coordinates: { longitude: string; latitude: string };
   ownerId: string;
 }
-
-interface MenuItem {
-  name: string;
-  price: string;
-  category: string;
-  info: string;
-}
