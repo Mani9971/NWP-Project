@@ -33,5 +33,10 @@
     <label class="form-label">Description</label>
     <input formControlName="info" class="form-item" pInputText />
   </div>
-  <button pButton label="Add" class="form-button"></button>
+  <button
+    [disabled]="!formGroup.valid"
+    pButton
+    label="Add"
+    class="form-button"
+  ></button>
 </form>
