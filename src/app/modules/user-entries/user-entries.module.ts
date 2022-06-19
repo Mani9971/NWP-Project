@@ -40,7 +40,6 @@ import { UserEntriesComponent } from './user-entries.component';
     TableModule,
     ShellModule,
   ],
-  exports: [MenuItemDialogComponent],
   entryComponents: [MenuItemDialogComponent],
 })
 export class UserEntriesModule {}
