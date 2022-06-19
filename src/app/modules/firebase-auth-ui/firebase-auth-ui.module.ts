@@ -8,7 +8,6 @@ import { PasswordModule } from 'primeng/password';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { FirebaseAuthUiRoutingModule } from './firebase-auth-ui-routing.module';
 import { FirebaseAuthUiComponent } from './firebase-auth-ui.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
@@ -21,7 +20,6 @@ import { VerifyEmailComponent } from './pages/verify-email/verify-email.componen
     SignUpComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
-    DashboardComponent,
   ],
   imports: [
     CommonModule,

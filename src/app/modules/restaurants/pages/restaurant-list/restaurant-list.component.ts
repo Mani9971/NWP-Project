@@ -48,7 +48,6 @@ export class RestaurantListComponent implements OnInit {
   }
 
   showPriceList(restaurant: any) {
-    console.log('restaurant name...', restaurant.name);
     this.router.navigate([
       'restaurants/' + restaurant.id,
       { name: restaurant.name },

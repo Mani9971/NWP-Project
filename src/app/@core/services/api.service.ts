@@ -82,8 +82,8 @@ export class ApiService {
             const data = action.payload.doc.data();
             const id = action.payload.doc.id;
             return {
-              id,
               ...data,
+              id: id,
             };
           });
         })
@@ -91,7 +91,6 @@ export class ApiService {
   }
 
   addItem(restaurantId: string, data: any) {
-    console.log('data...', data);
     return this.afs
       .doc('restaurants/' + restaurantId)
       .collection('menuItems')

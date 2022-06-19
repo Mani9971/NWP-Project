@@ -43,7 +43,6 @@ export class AddRestaurantComponent implements OnInit {
       .pipe(
         switchMap(([id, params]: any) => {
           this.currentUserId = id;
-          console.log('currentUserId', this.currentUserId);
           let restaurantId = params.get('id');
           if (!restaurantId) {
             this.title = 'Add restaurant';
@@ -53,7 +52,6 @@ export class AddRestaurantComponent implements OnInit {
 
           return this.apiService.getRestaurant(restaurantId).pipe(
             switchMap((restaurant: any) => {
-              console.log('restaurant...', restaurant);
               if (restaurant.ownerId !== this.currentUserId) {
                 this.title = 'Add restaurant';
                 this.isEditMode = false;
@@ -83,7 +81,6 @@ export class AddRestaurantComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('Save button pressed...');
     if (!this.formGroup.valid) {
       return;
     }
@@ -119,8 +116,6 @@ export class AddRestaurantComponent implements OnInit {
       )
       .catch((err) => {
         this.notificationService.showErrorNotification('Error occurred');
-        console.log('err...', err);
       });
-    console.log('form submitted with values', this.formGroup.value);
   }
 }

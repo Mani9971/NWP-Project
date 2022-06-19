@@ -45,7 +45,6 @@ export class MenuItemDialogComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('formGroup...', this.formGroup.value);
     this.ref.close({
       editMode: this.isEditMode,
       data: { id: this.currentItemId, ...this.formGroup.value },

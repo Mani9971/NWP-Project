@@ -37,7 +37,6 @@ export class UserEntryListComponent implements OnInit, OnDestroy {
   }
 
   editEntry(restaurant: any) {
-    console.log('restaurant name...', restaurant.name);
     this.router.navigate([
       'user-entries/edit/' + restaurant.id,
       { name: restaurant.name },

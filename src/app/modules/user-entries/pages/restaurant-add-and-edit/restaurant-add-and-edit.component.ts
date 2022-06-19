@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { ApiService } from 'src/app/@core/services/api.service';
 import { NotificationService } from 'src/app/@core/services/notification.service';
 import { MenuItemDialogComponent } from '../../components/menu-item-dialog/menu-item-dialog.component';
@@ -38,7 +38,6 @@ export class RestaurantAddAndEditComponent implements OnInit {
     const ref = this.dialogService.open(MenuItemDialogComponent, {
       data: {
         restaurantId: this.restaurantId,
-        itemId: item?.id,
         data: item ?? '',
       },
       header: 'Add menu item',
@@ -49,7 +48,6 @@ export class RestaurantAddAndEditComponent implements OnInit {
       if (!data) {
         return;
       }
-      console.log('data...', data);
       if (!data.editMode) {
         this.apiService
           .addItem(this.restaurantId, data.data)
@@ -76,12 +74,9 @@ export class RestaurantAddAndEditComponent implements OnInit {
     this.data$ = this.route.params.pipe(
       switchMap((params) =>
         this.apiService.getMenuItems(params['id']).pipe(
-          tap(console.log),
           map((menuItems: any) => {
             this.showTable = true;
-            console.log('showtable...', this.showTable);
             this.restaurantId = params['id'];
-            console.log('restaurant...', menuItems);
             return menuItems.filter((x: any) => x.name !== null);
           })
         )
@@ -101,7 +96,6 @@ export class RestaurantAddAndEditComponent implements OnInit {
   }
 
   editItem(item: any) {
-    console.log('item...', item);
     this.showMenuItemDialog(item);
   }
 }
