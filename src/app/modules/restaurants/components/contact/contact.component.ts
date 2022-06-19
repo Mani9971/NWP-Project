@@ -15,6 +15,6 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
     this.phone = this.config.data?.contact ?? 'No contact info';
-    this.email = this.config.data?.email ?? '';
+    this.email = this.config.data?.email ?? 'No e-mail';
   }
 }

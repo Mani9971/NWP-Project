@@ -16,8 +16,8 @@ export class AuthService {
   private userActionSubject = new Subject();
   public userAction$ = this.userActionSubject.asObservable();
   constructor(
-    public afs: AngularFirestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public afs: AngularFirestore,
+    public afAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
@@ -54,8 +54,6 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
       })
