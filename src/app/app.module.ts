@@ -11,14 +11,12 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './@core/services/auth.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ShellModule } from './shell/shell.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ShellModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.config),
     AngularFireAuthModule,

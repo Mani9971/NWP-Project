@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './@core/guard/auth.guard';
+import { SignInGuard } from './@core/guard/sign-in.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       import('./modules/firebase-auth-ui/firebase-auth-ui.module').then(
         (m) => m.FirebaseAuthUiModule
       ),
+    canActivate: [SignInGuard],
   },
   {
     path: 'restaurants',

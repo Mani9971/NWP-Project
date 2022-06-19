@@ -6,12 +6,15 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import * as auth from 'firebase/auth';
+import { Subject } from 'rxjs';
 import { User } from '../models/user';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  private userActionSubject = new Subject();
+  public userAction$ = this.userActionSubject.asObservable();
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -29,6 +32,7 @@ export class AuthService {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
+      this.userActionSubject.next({});
     });
   }
   // Sign in with email/password
@@ -36,10 +40,10 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/auth/dashboard']);
-        });
         this.SetUserData(result.user);
+        this.ngZone.run(() => {
+          this.router.navigate(['/user-entries']);
+        });
       })
       .catch((error) => {
         console.error(error.message);
@@ -127,7 +131,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/auth/sign-in']);
+      this.router.navigate(['/auth/home']);
     });
   }
 }

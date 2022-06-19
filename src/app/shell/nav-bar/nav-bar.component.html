@@ -20,18 +20,20 @@
       >{{ "My entries" }}</a
     >
   </div>
-  <div class="user-menu">
-    <a
-      type="button"
-      icon="pi pi-bars"
-      label="Show"
-      (click)="menu.toggle($event)"
-      >{{ localstorage.get("name") }}</a
+  <div class="user-menu" *ngIf="isLoggedIn()">
+    <a class="menu-label" (click)="menu.toggle($event)"
+      ><span
+        ><i class="pi pi-angle-down menu-icon"></i
+        ><b>{{ userData?.displayName }}</b></span
+      ></a
     >
-    <p-menu
-      #menu
-      [popup]="true"
-      [model]="isLoggedIn() ? loggedInitems : loggedOutitems"
-    ></p-menu>
+    <p-menu #menu [popup]="true" [model]="loggedInitems"></p-menu>
+  </div>
+  <div class="user-menu" *ngIf="!isLoggedIn()">
+    <a routerLink="/auth/sign-in"
+      ><span
+        ><i class="pi pi-fw pi-sign-in menu-icon"></i><b>Sign In</b></span
+      ></a
+    >
   </div>
 </div>

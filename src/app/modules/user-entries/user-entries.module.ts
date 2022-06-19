@@ -9,6 +9,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import { ShellModule } from 'src/app/shell/shell.module';
 import { AddRestaurantComponent } from './components/add-restaurant/add-restaurant.component';
 import { MenuItemDialogComponent } from './components/menu-item-dialog/menu-item-dialog.component';
 import { PriceListTableComponent } from './components/price-list-table/price-list-table.component';
@@ -37,6 +38,7 @@ import { UserEntriesComponent } from './user-entries.component';
     BreadcrumbModule,
     DynamicDialogModule,
     TableModule,
+    ShellModule,
   ],
   exports: [MenuItemDialogComponent],
   entryComponents: [MenuItemDialogComponent],

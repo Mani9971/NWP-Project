@@ -7,6 +7,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { GMapModule } from 'primeng/gmap';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { ShellModule } from 'src/app/shell/shell.module';
 import { ContactComponent } from './components/contact/contact.component';
 import { MapLocationComponent } from './components/map-location/map-location.component';
 import { RestaurantDetailsComponent } from './pages/restaurant-details/restaurant-details.component';
@@ -32,6 +33,7 @@ import { RestaurantsComponent } from './restaurants.component';
     GMapModule,
     TooltipModule,
     BreadcrumbModule,
+    ShellModule,
   ],
   entryComponents: [MapLocationComponent],
 })
