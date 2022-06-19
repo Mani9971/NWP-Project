@@ -1,8 +1,8 @@
 .container {
   width: 100%;
-  height: calc(100% - 4em);
+  height: calc(100% - 9em);
   text-align: center;
-  position: fixed;
+
   padding: 0 13em 0 13em;
 }
 
@@ -15,4 +15,8 @@
   text-align: left;
   font-weight: bold;
   margin: 1em 0 1em 0;
+}
+
+.name-input {
+  width: 3em;
 }

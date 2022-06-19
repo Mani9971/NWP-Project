@@ -19,14 +19,14 @@
   width: 22vw;
 }
 
-.form-item {
+.form-item-auth {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
 
-.form-label {
+.form-label-auth {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -50,7 +50,7 @@ a:visited {
   color: #009df8;
 }
 
-.form-button {
+.form-button-auth {
   display: flex;
   flex-direction: column;
 }

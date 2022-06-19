@@ -20,5 +20,18 @@
       >{{ "My entries" }}</a
     >
   </div>
-  <div class="user-menu"><b>manuel.ples</b></div>
+  <div class="user-menu">
+    <a
+      type="button"
+      icon="pi pi-bars"
+      label="Show"
+      (click)="menu.toggle($event)"
+      >{{ localstorage.get("name") }}</a
+    >
+    <p-menu
+      #menu
+      [popup]="true"
+      [model]="isLoggedIn() ? loggedInitems : loggedOutitems"
+    ></p-menu>
+  </div>
 </div>

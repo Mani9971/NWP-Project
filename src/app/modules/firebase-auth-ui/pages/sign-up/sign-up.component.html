@@ -1,12 +1,12 @@
 <div class="container">
   <p-card [header]="header" class="register-form">
     <form [formGroup]="registrationGroup" class="form-column">
-      <div class="form-item">
-        <label class="form-label">E-mail</label>
+      <div class="form-item-auth">
+        <label class="form-label-auth">E-mail</label>
         <input type="text" pInputText formControlName="email" />
       </div>
-      <div class="form-item">
-        <label class="form-label">Password</label>
+      <div class="form-item-auth">
+        <label class="form-label-auth">Password</label>
         <input
           type="password"
           pPassword
@@ -19,7 +19,7 @@
           >Sign in</a
         ></span
       >
-      <div class="form-button button-margin">
+      <div class="form-button-auth button-margin">
         <button
           pButton
           label="Sign up"
@@ -28,7 +28,7 @@
           (click)="signUpWithEmail()"
         ></button>
       </div>
-      <div class="form-button">
+      <div class="form-button-auth">
         <button
           icon="pi pi-google"
           pButton

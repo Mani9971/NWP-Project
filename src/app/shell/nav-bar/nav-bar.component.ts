@@ -8,18 +8,15 @@ import { AuthService } from 'src/app/@core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavBarComponent implements OnInit {
-  items = [
-    { title: 'Home', route: '/home' },
-    { title: 'Restaurants', route: '/restaurants' },
-    { title: 'My entries', route: '/user-entries' },
-    { title: 'Item4', route: '/route3' },
-    { title: 'Item5', route: '/route4' },
-  ];
+  name = '';
+  loggedInitems = [{ label: 'Sign Out', icon: 'pi pi-fw pi-sign-out' }];
 
+  loggedOutitems = [{ label: 'Sign In', icon: 'pi pi-fw pi-sign-in' }];
   constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {}
+
   isLoggedIn() {
     return this.authService.isLoggedIn;
   }
-
-  ngOnInit(): void {}
 }

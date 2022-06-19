@@ -82,7 +82,7 @@ export class RestaurantAddAndEditComponent implements OnInit {
             console.log('showtable...', this.showTable);
             this.restaurantId = params['id'];
             console.log('restaurant...', menuItems);
-            return menuItems.map((x: any) => x);
+            return menuItems.filter((x: any) => x.name !== null);
           })
         )
       )
