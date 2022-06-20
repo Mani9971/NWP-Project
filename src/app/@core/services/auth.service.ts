@@ -89,7 +89,7 @@ export class AuthService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
-        this.router.navigate(['/auth/dashboard']);
+        this.router.navigate(['/user-entries']);
       }
     });
   }
@@ -99,7 +99,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/auth/dashboard']);
+          this.router.navigate(['/user-entries']);
         });
         this.SetUserData(result.user);
       })
@@ -129,7 +129,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/auth/home']);
+      this.router.navigate(['/user-entries']);
     });
   }
 }
