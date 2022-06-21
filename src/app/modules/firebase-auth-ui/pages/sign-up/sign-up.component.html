@@ -2,6 +2,10 @@
   <p-card [header]="header" class="register-form">
     <form [formGroup]="registrationGroup" class="form-column">
       <div class="form-item-auth">
+        <label class="form-label-auth">Username</label>
+        <input type="text" pInputText formControlName="username" />
+      </div>
+      <div class="form-item-auth">
         <label class="form-label-auth">E-mail</label>
         <input type="text" pInputText formControlName="email" />
       </div>

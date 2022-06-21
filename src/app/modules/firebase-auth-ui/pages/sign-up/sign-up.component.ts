@@ -16,6 +16,11 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationGroup = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15),
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -33,7 +38,8 @@ export class SignUpComponent implements OnInit {
     this.authService
       .SignUp(
         this.registrationGroup.value.email,
-        this.registrationGroup.value.password
+        this.registrationGroup.value.password,
+        this.registrationGroup.value.username
       )
       .then(() => {
         this.loading[0] = false;

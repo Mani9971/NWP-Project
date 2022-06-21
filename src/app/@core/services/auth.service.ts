@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import * as auth from 'firebase/auth';
 import { Subject } from 'rxjs';
 import { User } from '../models/user';
+import { NotificationService } from './notification.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,15 +20,19 @@ export class AuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private notificationService: NotificationService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
+    this.afAuth.user.subscribe((user: any) => {
+      localStorage.setItem('user', JSON.stringify(user));
+      JSON.parse(localStorage.getItem('user')!);
+      this.userActionSubject.next({});
+    });
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -46,19 +51,29 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        console.error(error.message);
+        this.notificationService.showErrorNotification(error.message);
       });
   }
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(email: string, password: string, displayName: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
+        result.user
+          ?.updateProfile({
+            displayName: displayName,
+          })
+          .then((data) => {
+            localStorage.setItem('user', 'null');
+            this.SendVerificationMail();
+            this.SetUserData(result.user);
+          })
+          .catch((error) => {
+            this.notificationService.showErrorNotification(error.message);
+          });
       })
       .catch((error) => {
-        console.error(error.message);
+        this.notificationService.showErrorNotification(error.message);
       });
   }
   // Send email verfificaiton when new user sign up
@@ -129,7 +144,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/user-entries']);
+      this.router.navigate(['/home']);
     });
   }
 }

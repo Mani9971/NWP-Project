@@ -13,7 +13,9 @@ export class VerifyEmailComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userData = localStorage.getItem('user');
+  }
 
   resendVerificationMail() {
     this.authService.SendVerificationMail();
